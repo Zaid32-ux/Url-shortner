@@ -24,6 +24,12 @@ const urlSchema = new mongoose.Schema({
   },
 });
 
+// Update the updated_at field before saving
+urlSchema.pre("save", function (next) {
+  this.updated_at = Date.now();
+  next();
+});
+
 const Url = mongoose.model("Url", urlSchema);
 
 export default Url;
